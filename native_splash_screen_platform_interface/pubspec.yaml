@@ -1,0 +1,19 @@
+name: native_splash_screen_platform_interface
+description: "A common platform interface for the native_splash_screen plugin."
+version: 0.1.0
+repository: https://github.com/anicine/native_splash_screen
+# homepage:
+
+environment:
+  sdk: ^3.7.2
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  plugin_platform_interface: ^2.1.8
+
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
