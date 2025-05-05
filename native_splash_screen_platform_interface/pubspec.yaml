@@ -1,6 +1,6 @@
 name: native_splash_screen_platform_interface
 description: "A common platform interface for the native_splash_screen plugin."
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/anicine/native_splash_screen
 # homepage:
 

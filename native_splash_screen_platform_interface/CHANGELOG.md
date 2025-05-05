@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Update the license to match the project one.
+
 ## 0.1.0
 
 - Initial release of the platform interface for `native_splash_screen`.
