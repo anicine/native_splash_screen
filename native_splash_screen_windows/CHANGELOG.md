@@ -1,0 +1,7 @@
+## 0.1.0
+
+- Initial release of the Windows implementation of `native_splash_screen`.
+- Displays a native Windows splash window using Win32 APIs.
+- Added support for:
+  - Animated close (fade, slide, scale).
+- Integration with `CloseAnimation` types from the platform interface.
