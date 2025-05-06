@@ -3,6 +3,10 @@ description: "Demonstrates how to use the native_splash_screen plugin."
 publish_to: 'none'
 version: 0.1.0
 
+platforms:
+  linux:
+  windows:
+
 environment:
   sdk: ^3.7.2
 
