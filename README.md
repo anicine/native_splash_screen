@@ -98,7 +98,7 @@ This will:
 
 Apply the following patch to your `linux/runner/CMakeLists.txt`:
 
-> if you edited the linux path in `native_splash_screen.cmake`, you
+> if you edited the linux path in `native_splash_screen.yaml`, you
 > need to apply the patch in to the **correct** CMakefile.txt 
 
 ```diff
@@ -115,7 +115,7 @@ Apply the following patch to your `linux/runner/CMakeLists.txt`:
 
 Apply the following patch to your `windows/runner/CMakeLists.txt`:
 
-> if you edited the windows path in `native_splash_screen.cmake`, you
+> if you edited the windows path in `native_splash_screen.yaml`, you
 > need to apply the patch in to the **correct** CMakefile.txt 
 
 ```diff
