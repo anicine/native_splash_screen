@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Update the README.md
+
 ## 0.1.0
 
 - Initial release of the CLI tool for generating splash screen definitions.
