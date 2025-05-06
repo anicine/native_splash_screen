@@ -120,9 +120,10 @@ packages:
   native_splash_screen_linux:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_linux"
-      relative: true
-    source: path
+      name: native_splash_screen_linux
+      sha256: f134ee2c70066c6a20549390fed415e0d8790a3bc34bd96aedb249604bffb4cb
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.0"
   native_splash_screen_platform_interface:
     dependency: transitive
@@ -135,9 +136,10 @@ packages:
   native_splash_screen_windows:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_windows"
-      relative: true
-    source: path
+      name: native_splash_screen_windows
+      sha256: b850fc518d250398c3b4387684df85195f22d73fae9f2139398943fe7e790355
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.0"
   path:
     dependency: transitive
