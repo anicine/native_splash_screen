@@ -22,6 +22,7 @@
 - [🚀 Usage](#-usage)
 - [🛠️ How It Works](#️-how-it-works)
 - [📝 Configuration](#-configuration)
+- [🎥 Demos](#-demos)
 - [📄 License](#-license)
 
 ---
@@ -226,6 +227,25 @@ See the [example app](https://github.com/anicine/native_splash_screen/tree/main/
 ## 📝 Configuration
 
 See [native_splash_screen_cli](https://pub.dev/packages/native_splash_screen_cli) for configuration reference.
+
+## 🎥 Demos
+
+Here are some recorded demos of the splash screen in different environments:
+
+### 🐧 Hyprland (Wayland)
+
+![Hyprland Demo](https://raw.githubusercontent.com/anicine/native_splash_screen/refs/heads/main/resources/nss-hyprland.gif)
+
+> ⚠️ Note: Most Wayland window managers — especially tiling WMs like Hyprland — are very strict about client-side window movement.  
+> Because of this, only the **fade** animation is supported reliably. Slide or Move transitions may not behave as expected.
+
+### 🐧 Linux Mint (X11)
+
+![Mint Demo](https://raw.githubusercontent.com/anicine/native_splash_screen/refs/heads/main/resources/nss-mint.gif)
+
+### 🪟 Windows
+
+![Windows Demo](https://raw.githubusercontent.com/anicine/native_splash_screen/refs/heads/main/resources/nss-windows.gif)
 
 ## 📄 License
 
