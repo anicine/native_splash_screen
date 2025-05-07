@@ -1,7 +1,7 @@
 name: native_splash_screen_linux
 description: "Linux implementation of the native_splash_screen plugin."
 repository: https://github.com/anicine/native_splash_screen
-version: 0.1.0
+version: 1.0.0
 # homepage:
 
 topics:
@@ -17,7 +17,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  native_splash_screen_platform_interface: '>=0.1.0 <1.0.0'
+  native_splash_screen_platform_interface: '>=1.0.0 <2.0.0'
 
 
 flutter:
