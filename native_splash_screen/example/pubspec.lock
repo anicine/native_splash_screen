@@ -108,39 +108,39 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "1.0.0"
   native_splash_screen_cli:
     dependency: "direct dev"
     description:
       name: native_splash_screen_cli
-      sha256: "72f382c8e9e014a547428f56625c394daabc466eedd9797ba5a1ff9519764696"
+      sha256: "677be669c6425828be095b503c1bcc5e37188250be1891e55dcb8996f9aecf49"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "1.0.0"
   native_splash_screen_linux:
     dependency: transitive
     description:
       name: native_splash_screen_linux
-      sha256: f134ee2c70066c6a20549390fed415e0d8790a3bc34bd96aedb249604bffb4cb
+      sha256: "1d5cb8def1be53c389b41d6a97eca58f498aa7b42597d743bb0100a6ffce4a21"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "1.0.0"
   native_splash_screen_platform_interface:
     dependency: transitive
     description:
       name: native_splash_screen_platform_interface
-      sha256: "049ed951c94999d63b4d0d2d41937ba128a0670913f34879cc8ac3026fe6c578"
+      sha256: "09923e0f4d7ff892d8824ea1689ef662dd214da4f1e87bf874b69999d5f5f01b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.1"
+    version: "1.0.0"
   native_splash_screen_windows:
     dependency: transitive
     description:
       name: native_splash_screen_windows
-      sha256: b850fc518d250398c3b4387684df85195f22d73fae9f2139398943fe7e790355
+      sha256: "67932ee94c43d119327d0530b1c46e3fe61418abb143c6a9b1379ed90a7aec39"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
