@@ -1,3 +1,7 @@
+## 1.0.0
+
+- First stable release
+
 ## 0.1.0
 
 - Initial release of the Windows implementation of `native_splash_screen`.
