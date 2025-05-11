@@ -26,7 +26,11 @@ String escapeString(String input) {
 ///   If provided, this function will try to use it or find "runner" within it.
 ///
 /// This revised function aims to be more robust for locating the conventional runner directory.
-Directory locateOrCreateRunnerDir(String originPath, String platformSubDir, [String? customRunnerPath]) {
+Directory locateOrCreateRunnerDir(
+  String originPath,
+  String platformSubDir, [
+  String? customRunnerPath,
+]) {
   String basePath;
 
   if (customRunnerPath != null && customRunnerPath.isNotEmpty) {
@@ -45,17 +49,18 @@ Directory locateOrCreateRunnerDir(String originPath, String platformSubDir, [Str
 
   // If not, look for a "runner" (or "Runner" on macOS) subdirectory
   String runnerDirName = "runner";
-  if (Platform.isMacOS && Directory(path.join(basePath, "Runner")).existsSync()) {
+  if (Platform.isMacOS &&
+      Directory(path.join(basePath, "Runner")).existsSync()) {
     // Check for macOS "Runner" first if on macOS and it exists
     runnerDirName = "Runner";
-  } else if (Directory(path.join(basePath, "runner")).existsSync()){
+  } else if (Directory(path.join(basePath, "runner")).existsSync()) {
     // Check for lowercase "runner" if uppercase wasn't found or not on macOS
     runnerDirName = "runner";
   } else {
     // Neither "Runner" nor "runner" exists as a subdirectory,
     runnerDirName = Platform.isMacOS ? "Runner" : "runner";
   }
-  
+
   final runnerPath = path.join(basePath, runnerDirName);
   return Directory(runnerPath);
 }
@@ -208,4 +213,20 @@ String colorHex(Color color) {
           '${color.g.toInt().toRadixString(16).padLeft(2, '0')}'
           '${color.b.toInt().toRadixString(16).padLeft(2, '0')}'
       .toUpperCase();
+}
+
+extension StringCasingExtension on String {
+  /// Capitalizes the first letter of the string.
+  ///
+  /// Examples:
+  /// "release" -> "Release"
+  String capitalizeFirstLetter() {
+    if (isEmpty) {
+      return "";
+    }
+    if (length == 1) {
+      return toUpperCase();
+    }
+    return '${this[0].toUpperCase()}${substring(1)}';
+  }
 }
