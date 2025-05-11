@@ -158,7 +158,7 @@ Future<void> handleWindows(SplashScreenConfig config, bool verbose) async {
   final dirPath = config.platforms.windows!.path;
   final Directory distDir;
   try {
-    distDir = requireCMakeFile(dirPath);
+    distDir = requireBuildFile(dirPath, "native_splash_screen.cmake");
   } catch (_) {
     logger.f(
       '[native_splash_screen_cli] Error: Missing native_splash_screen.cmake\n'
@@ -235,13 +235,12 @@ Future<void> setupWindows(
     return;
   }
 
+  // If outputPath is provided, use it; otherwise default to 'windows'.
   final Directory distDir;
   if (noRunner != true) {
-    // If outputPath is provided, use it; otherwise default to 'windows'.
     distDir = Directory(platform.path);
   } else {
-    // If outputPath is provided, use it; otherwise default to 'windows'.
-    distDir = makeRunnerDir("windows", platform.path);
+    distDir = locateOrCreateRunnerDir("windows", platform.path);
   }
 
   // Ensure output directory exists
