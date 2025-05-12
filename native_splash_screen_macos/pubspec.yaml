@@ -1,7 +1,7 @@
 name: native_splash_screen_macos
 description: "MacOS implementation of the native_splash_screen plugin."
 repository: https://github.com/anicine/native_splash_screen
-version: "0.0.1"
+version: "0.1.0"
 # homepage:
 
 topics:
