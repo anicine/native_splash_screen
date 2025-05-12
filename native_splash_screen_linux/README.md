@@ -25,7 +25,7 @@ Add the main plugin instead:
 
 ```yaml
 dependencies:
-  native_splash_screen: ^1.0.0
+  native_splash_screen: ^2.0.0
 ```
 ## License
 
