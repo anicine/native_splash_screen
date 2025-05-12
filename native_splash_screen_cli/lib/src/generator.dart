@@ -9,6 +9,7 @@ import '../models/platforms.dart';
 import '../src/logger.dart';
 import '../src/linux.dart';
 import '../src/windows.dart';
+import '../src/macos.dart';
 
 import '../common/const.dart';
 
@@ -214,6 +215,10 @@ class SplashScreenGenerator {
                 "windows/runner",
               )
               : null,
+      macos:
+          platformsYaml['macos'] is YamlMap
+              ? parsePlatform(platformsYaml['macos'] as YamlMap, "macos/Runner")
+              : null,
     );
     // TODO: Additional platforms can be added here in the future
   }
@@ -241,7 +246,15 @@ class SplashScreenGenerator {
     final windowsConfig =
         platforms.hasWindows ? parseWindowsConfig(flavorConfig) : null;
 
-    return Flavor(name: flavorName, linux: linuxConfig, windows: windowsConfig);
+    final macosConfig =
+        platforms.hasMacos ? parseMacosConfig(flavorConfig) : null;
+
+    return Flavor(
+      name: flavorName,
+      linux: linuxConfig,
+      windows: windowsConfig,
+      macos: macosConfig,
+    );
     // TODO: Additional platforms can be added here in the future
   }
 
@@ -258,16 +271,23 @@ class SplashScreenGenerator {
     final windowsConfig =
         platforms.hasWindows ? parseWindowsConfig(flavorYaml) : null;
 
-    return Flavor(name: flavorName, linux: linuxConfig, windows: windowsConfig);
+    final macosConfig =
+        platforms.hasMacos ? parseMacosConfig(flavorYaml) : null;
+
+    return Flavor(
+      name: flavorName,
+      linux: linuxConfig,
+      windows: windowsConfig,
+      macos: macosConfig,
+    );
     // TODO: Additional platforms can be added here in the future
   }
 
   /// Generate code for all build modes (release, debug, profile)
   Future<void> generate({required SplashScreenConfig config}) async {
     await handleLinux(config, verbose);
-
     await handleWindows(config, verbose);
-
+    await handleMacos(config, verbose);
     return;
     // TODO: Additional platforms can be added here in the future
   }
@@ -276,6 +296,7 @@ class SplashScreenGenerator {
   Future<void> setup(Platforms platforms, [bool? force, bool? noRunner]) async {
     await setupLinux(platforms.linux, force, noRunner, verbose);
     await setupWindows(platforms.windows, force, noRunner, verbose);
+    await setupMacos(platforms.macos, force, noRunner, verbose);
     return;
     // TODO: Additional platforms can be added here in the future
   }
