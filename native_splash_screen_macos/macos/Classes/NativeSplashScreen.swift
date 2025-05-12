@@ -128,13 +128,11 @@ public class NativeSplashScreen {
         guard width > 0, height > 0, !bytes.isEmpty else { return nil }
         
         let bitsPerComponent = 8
-        let bitsPerPixel = 32 // ARGB = 4 bytes
+        let bitsPerPixel = 32 // BGRA = 4 bytes per pixel
         let bytesPerRow = width * 4
         let expectedTotalBytes = bytesPerRow * height
 
         guard bytes.count == expectedTotalBytes else {
-            // This is a significant error if CLI guarantees data integrity.
-            // A print statement here is justified for debugging bad generated data.
             print("NativeSplashScreen: ERROR - Pixel data size (\(bytes.count)) does not match expected size (\(expectedTotalBytes)) for \(width)x\(height) image.")
             return nil
         }
@@ -145,24 +143,14 @@ public class NativeSplashScreen {
         let cgImage = data.withUnsafeBytes { (unsafeRawBufferPointer: UnsafeRawBufferPointer) -> CGImage? in
             guard let baseAddress = unsafeRawBufferPointer.baseAddress else { return nil }
             
-            guard let providerRef = CGDataProvider(dataInfo: nil, data: baseAddress, size: data.count, releaseData: { _, _, _ in
-                // Data is owned by the `data` local var, which will go out of scope.
-                // CGDataProvider will retain the data pointer. This is generally okay
-                // as `Data` copies the bytes, so the buffer from `bytes` is safe here.
-            }) else { return nil }
-            
-            // Assuming ARGB byte order: A, R, G, B sequentially for each pixel.
-            // When interpreted as a UInt32, if A is most significant, it's Big Endian.
-            // Common pixel formats might store as BGRA on little-endian systems when mapped to UInt32,
-            // but if your byte array is literally A then R then G then B, then using
-            // kCGImageAlphaPremultipliedFirst with CGBitmapInfo.byteOrder32Big is typical for ARGB.
-            // If your data is truly BGRA bytes, then use CGBitmapInfo.byteOrder32Little
-            // and perhaps kCGImageAlphaPremultipliedLast or kCGImageAlphaLast.
-            // Sticking to ARGB (Alpha First, components in R,G,B order) for byte array:
+            guard let providerRef = CGDataProvider(dataInfo: nil, data: baseAddress, size: data.count, releaseData: { _, _, _ in }) else { return nil }
+
+            // This assumes your bytes are in B, G, R, A order from Dart.
             let bitmapInfo: CGBitmapInfo = [
-                CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
-                CGBitmapInfo.byteOrder32Little // Pixel data is treated as little-endian 32-bit (e.g. 0xAARRGGBB)
+                CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), // Alpha is considered the "first" component after little-endian interpretation.
+                CGBitmapInfo.byteOrder32Little // BGRA byte streams on little-endian macOS
             ]
+
             return CGImage(
                 width: width,
                 height: height,
