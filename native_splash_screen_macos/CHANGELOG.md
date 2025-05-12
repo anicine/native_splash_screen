@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Update the platform interface plugin
+
 ## 2.0.0
 
 - First stable release

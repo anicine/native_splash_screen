@@ -99,7 +99,7 @@
     },
     {
       "name": "native_splash_screen_platform_interface",
-      "rootUri": "file:///home/dj-yacine/.pub-cache/hosted/pub.dev/native_splash_screen_platform_interface-1.0.0",
+      "rootUri": "file:///home/dj-yacine/.pub-cache/hosted/pub.dev/native_splash_screen_platform_interface-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -176,7 +176,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-05-12T14:24:35.075701Z",
+  "generated": "2025-05-12T14:46:37.167945Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///home/dj-yacine/fvm/versions/3.29.3",

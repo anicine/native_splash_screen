@@ -127,10 +127,10 @@ packages:
     dependency: "direct main"
     description:
       name: native_splash_screen_platform_interface
-      sha256: "09923e0f4d7ff892d8824ea1689ef662dd214da4f1e87bf874b69999d5f5f01b"
+      sha256: d1e30ff72c73c8b5c31924dcfdc16d60648384c307757b26aae219f4e719b137
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "2.0.0"
   path:
     dependency: transitive
     description:
