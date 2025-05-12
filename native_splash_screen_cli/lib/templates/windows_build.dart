@@ -4,7 +4,7 @@ import '../src/logger.dart';
 
 /// Creates the `native_splash_screen.cmake` file in [dirPath].
 /// If [force] is true, it will overwrite the file if it exists.
-void createWindowsCMakeFile(String dirPath, [bool? force]) {
+void createWindowsBuildFile(String dirPath, [bool? force]) {
   final file = File('$dirPath/native_splash_screen.cmake');
 
   if (file.existsSync() && force != true) {

@@ -10,7 +10,7 @@ import '../common/utils.dart';
 import '../common/const.dart';
 
 import '../templates/linux.dart';
-import '../templates/linux_cmake.dart';
+import '../templates/linux_build.dart';
 
 import '../src/logger.dart';
 
@@ -258,5 +258,5 @@ Future<void> setupLinux(
     }
   }
 
-  createLinuxCMakeFile(distDir.path, force);
+  createLinuxBuildFile(distDir.path, force);
 }

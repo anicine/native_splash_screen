@@ -10,7 +10,7 @@ import '../common/utils.dart';
 import '../common/const.dart';
 
 import '../templates/macos.dart';
-import '../templates/macos_swift.dart';
+import '../templates/macos_build.dart';
 
 import '../src/logger.dart';
 
@@ -256,5 +256,5 @@ Future<void> setupMacos(
     }
   }
 
-  createMacosSwiftFile(distDir.path, force);
+  createMacosBuildFile(distDir.path, force);
 }

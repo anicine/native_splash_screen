@@ -10,7 +10,7 @@ import '../common/utils.dart';
 import '../common/const.dart';
 
 import '../templates/windows.dart';
-import '../templates/windows_cmake.dart';
+import '../templates/windows_build.dart';
 
 import '../src/logger.dart';
 
@@ -255,5 +255,5 @@ Future<void> setupWindows(
     }
   }
 
-  createWindowsCMakeFile(distDir.path, force);
+  createWindowsBuildFile(distDir.path, force);
 }
