@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'native_splash_screen_macos'
-  s.version          = '0.1.0'
+  s.version          = '2.0.0'
   s.summary          = 'MacOS implementation of the native_splash_screen plugin.'
   s.description      = <<-DESC
 MacOS implementation of the native_splash_screen plugin.
