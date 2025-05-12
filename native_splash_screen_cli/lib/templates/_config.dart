@@ -44,6 +44,7 @@ Use the --force option to overwrite it.
 #       If not specified, defaults to:
 #         - "linux/runner" for Linux
 #         - "windows/runner" for Windows
+#         - "macos/Runner" for Macos
 #
 #       If you provide a custom path, it must end with "/runner".
 #       Otherwise, you must manually run:
@@ -60,14 +61,17 @@ Use the --force option to overwrite it.
 #    windows:
 #      enabled: true           # Enable splash screen generation for Windows
 #      fallback: true          # Fall back to release config if flavor is missing
-#      path: windows/runner    # Optional: custom path (must end with /runner)
+#    macos:
+#      enabled: true           # Enable splash screen generation for Macos
+#      fallback: true          # Fall back to release config if flavor is missing
+#      path: macos/Runner      # Optional: custom path (must end with /runner)
 
 # ─── Release Configuration ───────────────────────────────────────────────
 # The default splash screen config. This section is **optional**, unless:
 #   1. No `flavors` section is defined, OR
 #   2. Any platform explicitly enables `fallback: true`
 #
-# Each platform (linux/windows) may contain its own splash configuration.
+# Each platform (linux/windows/macos) may contain its own splash configuration.
 # Fields:
 #
 #   - window_width (int):  Width of the splash window in pixels.
@@ -143,7 +147,10 @@ platforms:
     fallback: false
   windows:
     enabled: true
-    fallback: false
+    fallback: true
+  macos:
+    enabled: true
+    fallback: true
 
 # Release configuration
 release:
@@ -153,7 +160,8 @@ release:
     window_title: "My Flutter App"
     window_color: "rgba(0,0,0,1)"
 
-    background_color: "rgba(0,0,0,0.2)"
+    # background will be ignored cause alpha == 0.
+    background_color: "rgba(0,0,0,0)"
     background_width: 450
     background_height: 225
     background_border_radius: 7.0
@@ -174,6 +182,20 @@ release:
     background_color: "rgba(0,0,0,0)"
     image_path: ""
 
+  macos:
+    window_width: 450
+    window_height: 225
+    window_title: "My Flutter App"
+
+    image_path: ""
+    image_width: 400
+    image_height: 200
+    image_scaling: true
+    image_border_radius: 0.0
+    
+    blur_radius: 0.0
+    with_animation: true
+
 # Debug configuration
 debug:
   linux:
@@ -187,6 +209,12 @@ debug:
     window_height: 150
     window_title: "My Flutter App (Debug)"
     background_color: "#C80000C8"
+    image_path: ""
+  macos:
+    window_width: 300
+    window_height: 150
+    window_title: "My Flutter App (Debug)"
+    background_color: "rgba(128,0,0,0.5)"
     image_path: ""
 
 # Profile configuration
@@ -203,6 +231,12 @@ profile:
     window_title: "My Flutter App (Profile)"
     background_color: "rgba(0,0,0,0)"
     image_path: ""
+  macos:
+    window_width: 400
+    window_height: 200
+    window_title: "My Flutter App (Profile)"
+    background_color: "rgba(0,0,0,0)"
+    image_path: ""
 
 # Custom flavors
 flavors:
@@ -214,6 +248,12 @@ flavors:
       background_color: "rgba(0,0,0,0)"
       image_path: ""
     windows:
+      window_width: 400
+      window_height: 225
+      window_title: "My Flutter App (Meeting)"
+      background_color: "rgba(0,0,0,0)"
+      image_path: ""
+    macos:
       window_width: 400
       window_height: 225
       window_title: "My Flutter App (Meeting)"

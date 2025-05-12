@@ -1,0 +1,34 @@
+name: native_splash_screen_macos
+description: "MacOS implementation of the native_splash_screen plugin."
+repository: https://github.com/anicine/native_splash_screen
+version: "2.0.0"
+# homepage:
+
+topics:
+  - macos
+
+platforms:
+  macos:
+
+environment:
+  sdk: ^3.7.2
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  native_splash_screen_platform_interface: '>=1.0.0 <2.0.0'
+
+
+flutter:
+  plugin:
+    implements: native_splash_screen
+    platforms:
+      macos:
+        pluginClass: NativeSplashScreenMacosPlugin
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0

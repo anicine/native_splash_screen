@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:image/image.dart' show Color, ColorRgba8;
+import 'package:path/path.dart' as path;
 
 /// Escapes special characters in strings for C++ code
 String escapeString(String input) {
@@ -14,35 +15,73 @@ String escapeString(String input) {
       .replaceAll('\t', '\\t');
 }
 
-/// Make the runner directory and return the [Directory] object.
-/// Handles cases where [origin] or [dirPath] ends with '/runner' or '/runner/'.
-Directory makeRunnerDir(String origin, [String? dirPath]) {
-  final basePath = dirPath ?? origin;
+/// Original function adapted for robustness and using `path` package.
+///
+/// Tries to find or create a "runner" directory (case-insensitive) within a given base path.
+/// Defaults to looking inside `originPath/platform/runner`.
+///
+/// - [originPath]: The root path of the project.
+/// - [platformSubDir]: The platform directory name (e.g., "macos", "linux", "windows").
+/// - [customRunnerPath]: An optional full path that might already point to or include "runner".
+///   If provided, this function will try to use it or find "runner" within it.
+///
+/// This revised function aims to be more robust for locating the conventional runner directory.
+Directory locateOrCreateRunnerDir(
+  String originPath,
+  String platformSubDir, [
+  String? customRunnerPath,
+]) {
+  String basePath;
 
-  // Normalize the path to remove any trailing slashes
-  final normalizedPath = basePath.replaceAll(RegExp(r'[/\\]+$'), '');
+  if (customRunnerPath != null && customRunnerPath.isNotEmpty) {
+    basePath = customRunnerPath;
+  } else {
+    basePath = path.join(originPath, platformSubDir);
+  }
 
-  // Check if the path already ends with 'runner'
-  final runnerDirPath =
-      normalizedPath.endsWith('/runner')
-          ? normalizedPath
-          : '$normalizedPath/runner';
+  // Normalize using the path package
+  basePath = path.normalize(basePath);
 
-  return Directory(runnerDirPath);
+  // Check if basePath itself ends with "runner" (case-insensitive)
+  if (path.basename(basePath).toLowerCase() == "runner") {
+    return Directory(basePath); // basePath is already the runner directory
+  }
+
+  // If not, look for a "runner" (or "Runner" on macOS) subdirectory
+  String runnerDirName = "runner";
+  if (Platform.isMacOS &&
+      Directory(path.join(basePath, "Runner")).existsSync()) {
+    // Check for macOS "Runner" first if on macOS and it exists
+    runnerDirName = "Runner";
+  } else if (Directory(path.join(basePath, "runner")).existsSync()) {
+    // Check for lowercase "runner" if uppercase wasn't found or not on macOS
+    runnerDirName = "runner";
+  } else {
+    // Neither "Runner" nor "runner" exists as a subdirectory,
+    runnerDirName = Platform.isMacOS ? "Runner" : "runner";
+  }
+
+  final runnerPath = path.join(basePath, runnerDirName);
+  return Directory(runnerPath);
 }
 
-/// Checks if the given directory contains 'native_splash_screen.cmake'.
-/// If the file exists, returns the [Directory] object.
-/// Otherwise, logs an error and exits the process.
-Directory requireCMakeFile(String dirPath) {
-  // Normalize the path to remove any trailing slashes
-  final normalizedPath = dirPath.replaceAll(RegExp(r'[/\\]+$'), '');
+/// Checks if a required build file exists within the given directory.
+///
+/// If the file exists, returns a [Directory] object representing it.
+/// Otherwise, throws a [FileSystemException].
+///
+/// - [directoryPath]: The path to the directory where the file should exist.
+/// - [fileName]: The name of the file to check for (e.g., "native_splash_screen.cmake", "NativeSplashScreen.swift").
+Directory requireBuildFile(String directoryPath, String fileName) {
+  // Normalize the directory path first to handle any OS-specific quirks or trailing slashes
+  final normalizedDirPath = path.normalize(directoryPath);
 
-  final cmakeFilePath = '$normalizedPath/native_splash_screen.cmake';
-  final cmakeFile = File(cmakeFilePath);
+  // Construct the full path to the file using the path package for cross-platform compatibility
+  final String filePath = path.join(normalizedDirPath, fileName);
+  final file = File(filePath);
 
-  if (cmakeFile.existsSync()) {
-    return Directory(dirPath);
+  if (file.existsSync()) {
+    return Directory(normalizedDirPath);
   } else {
     throw FileSystemException();
   }
@@ -174,4 +213,20 @@ String colorHex(Color color) {
           '${color.g.toInt().toRadixString(16).padLeft(2, '0')}'
           '${color.b.toInt().toRadixString(16).padLeft(2, '0')}'
       .toUpperCase();
+}
+
+extension StringCasingExtension on String {
+  /// Capitalizes the first letter of the string.
+  ///
+  /// Examples:
+  /// "release" -> "Release"
+  String capitalizeFirstLetter() {
+    if (isEmpty) {
+      return "";
+    }
+    if (length == 1) {
+      return toUpperCase();
+    }
+    return '${this[0].toUpperCase()}${substring(1)}';
+  }
 }

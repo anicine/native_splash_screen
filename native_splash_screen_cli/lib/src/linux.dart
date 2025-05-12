@@ -10,7 +10,7 @@ import '../common/utils.dart';
 import '../common/const.dart';
 
 import '../templates/linux.dart';
-import '../templates/linux_cmake.dart';
+import '../templates/linux_build.dart';
 
 import '../src/logger.dart';
 
@@ -161,7 +161,7 @@ Future<void> handleLinux(SplashScreenConfig config, bool verbose) async {
   final Directory distDir;
 
   try {
-    distDir = requireCMakeFile(dirPath);
+    distDir = requireBuildFile(dirPath, "native_splash_screen.cmake");
   } catch (_) {
     logger.f(
       '[native_splash_screen_cli] Error: Missing native_splash_screen.cmake\n'
@@ -238,13 +238,12 @@ Future<void> setupLinux(
     return;
   }
 
+  // If outputPath is provided, use it; otherwise default to 'linux'.
   final Directory distDir;
   if (noRunner != true) {
-    // If outputPath is provided, use it; otherwise default to 'linux'.
     distDir = Directory(platform.path);
   } else {
-    // If outputPath is provided, use it; otherwise default to 'linux'.
-    distDir = makeRunnerDir("linux", platform.path);
+    distDir = locateOrCreateRunnerDir("linux", platform.path);
   }
 
   // Ensure output directory exists
@@ -259,5 +258,5 @@ Future<void> setupLinux(
     }
   }
 
-  createLinuxCMakeFile(distDir.path, force);
+  createLinuxBuildFile(distDir.path, force);
 }

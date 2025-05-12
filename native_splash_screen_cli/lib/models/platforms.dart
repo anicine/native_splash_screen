@@ -1,15 +1,18 @@
 class Platforms {
   final Platform? linux;
   final Platform? windows;
+  final Platform? macos;
 
-  Platforms({this.linux, this.windows});
+  Platforms({this.linux, this.windows, this.macos});
 
   bool get hasLinux =>
       linux != null && linux!.enabled != null ? linux!.enabled! : false;
   bool get hasWindows =>
       windows != null && windows!.enabled != null ? windows!.enabled! : false;
+  bool get hasMacos =>
+      macos != null && macos!.enabled != null ? macos!.enabled! : false;
 
-  bool get hasAnyPlatform => hasLinux || hasWindows; //.. etc.
+  bool get hasAnyPlatform => hasLinux || hasWindows || hasMacos; //.. etc.
 
   bool canFallback() {
     bool f = false;
@@ -18,6 +21,9 @@ class Platforms {
     }
     if (!f && hasWindows) {
       f = windows!.canFall;
+    }
+    if (!f && hasMacos) {
+      f = macos!.canFall;
     }
 
     return f;
@@ -28,6 +34,7 @@ class Platforms {
     final enabledPlatforms = <String>[];
     if (hasLinux) enabledPlatforms.add('Linux');
     if (hasWindows) enabledPlatforms.add('Windows');
+    if (hasMacos) enabledPlatforms.add('Macos');
 
     return enabledPlatforms.join(", ");
   }

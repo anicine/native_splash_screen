@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as path;
+
 import '../models/image.dart';
 import '../models/desktop.dart';
 
@@ -77,8 +79,7 @@ Future<bool> _generateSourceFile({
   final target = 'native_splash_screen_$flavor.cpp';
 
   // Create complete file path using the output directory
-  final String outputFilePath =
-      outputDir.endsWith('/') ? '$outputDir$target' : '$outputDir/$target';
+  final String outputFilePath = path.join(outputDir, target);
 
   final outputFile = File(outputFilePath);
 
