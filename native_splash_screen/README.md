@@ -46,14 +46,16 @@ Add `native_splash_screen` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  native_splash_screen: ^2.0.0
+  native_splash_screen: ^2.0.2
 ```
+
 Also add the CLI tool under dev_dependencies:
 
 ```yaml
 dev_dependencies:
-  native_splash_screen_cli: ^2.0.0
+  native_splash_screen_cli: ^2.0.3
 ```
+
 > 💡 Make sure both native_splash_screen and native_splash_screen_cli use the same major version to ensure compatibility between the runtime plugin and the code generator.
 
 Then run:

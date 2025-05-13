@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Update the `README.md`.
+
 ## 2.0.1
 
 - Add `macos` to the platforms.
