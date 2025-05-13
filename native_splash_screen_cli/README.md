@@ -1,8 +1,8 @@
 # 🎨 native_splash_screen_cli
 
-> A powerful CLI tool for generating fully native, high-performance splash screens for Flutter desktop applications.
+> A powerful CLI tool for generating fully native, high-performance splash screens for Flutter applications.
 
-**native_splash_screen_cli** works in tandem with the [native_splash_screen](https://pub.dev/packages/native_splash_screen) package to generate optimized C/C++ code that delivers fast, smooth splash screens on **Linux** and **Windows**.
+**native_splash_screen_cli** works in tandem with the [native_splash_screen](https://pub.dev/packages/native_splash_screen) package to generate optimized platform native code that delivers fast, smooth splash screens on **Linux**, **Windows** and **Macos**.
 
 ## 📚 Table of Contents
 
@@ -27,7 +27,7 @@
 
 ## ✨ Features
 
-- 📊 Generate native splash screens that are **truly native** (GTK/Cairo on Linux, Win32 GDI on Windows)
+- 📊 Generate native splash screens that are **truly native** (GTK/Cairo on Linux, Win32 GDI on Windows, AppKit on Macos)
 - 🛠️ Easy CLI interface for setup, configuration, and generation
 - 🔄 Automatic CMake integration for seamless build process
 - 🎭 Support for multiple build flavors (debug, profile, and custom flavors)
@@ -37,11 +37,10 @@
 
 ## 📦 Installation
 
-Add `native_splash_screen_cli` to your `pubspec.yaml` under dev_dependencies:
+Add `native_splash_screen_cli` to the **dev_dependencies** in `pubspec.yaml` by running :
 
-```yaml
-dev_dependencies:
-  native_splash_screen_cli: ^0.1.1
+```sh
+flutter pub add --dev native_splash_screen_cli
 ```
 
 > 💡 Make sure both native_splash_screen and native_splash_screen_cli use the same major version to ensure compatibility between the runtime plugin and the code generator.
@@ -153,6 +152,10 @@ platforms:
   windows:
     enabled: true       # Enable Windows splash screen
     fallback: false     # Don't fall back to release config
+  
+  macos:
+    enabled: true       # Enable Macos splash screen
+    fallback: true     # Use release config if flavor is missing
 ```
 
 ### Release Configuration
@@ -189,12 +192,14 @@ debug:
     # Debug-specific settings
     window_title: "Debug Build"
     background_color: "#FFE0E0"
+    image_path: "assets/debug.png"
 
 profile:
   linux:
     # Profile-specific settings
     window_title: "Profile Build"
     background_color: "#E0FFE0"
+    image_path: "assets/profile.png"
 
 flavors:
   staging:
@@ -202,6 +207,8 @@ flavors:
       # Staging-specific settings
       window_title: "Staging Build"
       background_color: "#E0E0FF"
+      image_path: "assets/staging.png"
+
 ```
 
 ### Color Format Reference
@@ -233,6 +240,9 @@ platforms:
     enabled: true
     fallback: true
   windows:
+    enabled: true
+    fallback: true
+  macos:
     enabled: true
     fallback: true
 
@@ -267,15 +277,37 @@ release:
     image_scaling: true
     with_animation: true
 
+  macos:
+    window_width: 600
+    window_height: 400
+    window_title: "MyApp"
+    background_color: "#FFFFFF"
+    background_width: 550
+    background_height: 350
+    background_border_radius: 16.0
+    image_path: "assets/logo.png"
+    image_width: 300
+    image_height: 200
+    image_scaling: true
+    with_animation: true
+
 flavors:
   dev:
     linux:
       window_title: "MyApp Dev"
       background_color: "#E0F7FA"
+      image_path: "assets/dev.png"
       
     windows:
       window_title: "MyApp Dev"
       background_color: "#E0F7FA"
+      image_path: "assets/dev.png"
+
+    macos:
+      window_title: "MyApp Dev"
+      background_color: "#E0F7FA"
+      image_path: "assets/dev.png"
+
 ```
 
 ## 📄 License

@@ -1,6 +1,10 @@
+## 2.0.2
+
+- Update the **README.md**
+
 ## 2.0.1
 
-- add `native_splash_screen_platform_interface` for version compatibility.
+- Add `native_splash_screen_platform_interface` for version compatibility.
 
 ## 2.0.0
 
@@ -8,11 +12,11 @@
 
 ## 1.0.0
 
-- First stable release
+- First stable release.
 
 ## 0.1.1
 
-- Update the README.md
+- Update the **README.md**
 
 ## 0.1.0
 
