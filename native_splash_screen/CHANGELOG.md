@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Add `macos` to the platforms.
+
 ## 2.0.0
 
 - New stable release for new platform.
