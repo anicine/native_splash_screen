@@ -1,3 +1,7 @@
+## 2.0.3
+
+- remove `native_splash_screen_platform_interface`.
+
 ## 2.0.2
 
 - Update the **README.md**
