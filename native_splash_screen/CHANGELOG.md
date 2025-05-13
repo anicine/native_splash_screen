@@ -1,3 +1,7 @@
+## 2.0.0
+
+- New stable release for new platform.
+
 ## 1.0.0
 
 - First stable release
