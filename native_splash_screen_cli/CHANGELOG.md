@@ -1,3 +1,7 @@
+## 2.0.1
+
+- add `native_splash_screen_platform_interface` for version compatibility.
+
 ## 2.0.0
 
 - New stable release for new platform.

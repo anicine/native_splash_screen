@@ -95,7 +95,7 @@ packages:
     source: hosted
     version: "1.16.0"
   native_splash_screen_platform_interface:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: native_splash_screen_platform_interface
       sha256: d1e30ff72c73c8b5c31924dcfdc16d60648384c307757b26aae219f4e719b137
