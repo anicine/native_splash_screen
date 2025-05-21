@@ -108,42 +108,47 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.2"
+    version: "2.1.0"
   native_splash_screen_cli:
     dependency: "direct dev"
     description:
-      path: "../../native_splash_screen_cli"
-      relative: true
-    source: path
-    version: "2.0.3"
+      name: native_splash_screen_cli
+      sha256: f69dfd2bd97a9a199c66f720b6c3f7c5bb228f8e952d45d950a50e1e50c89bf6
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   native_splash_screen_linux:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_linux"
-      relative: true
-    source: path
-    version: "2.0.0"
+      name: native_splash_screen_linux
+      sha256: "0b22aef68df012d3e26d6f5dc22e119578b968d8e5502de6f76758727944a37b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   native_splash_screen_macos:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_macos"
-      relative: true
-    source: path
-    version: "2.0.1"
+      name: native_splash_screen_macos
+      sha256: cb49012650eefa71b59da2c937ea251f99e1fd7113884474dfe66bb0a64487d9
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   native_splash_screen_platform_interface:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_platform_interface"
-      relative: true
-    source: path
-    version: "2.0.0"
+      name: native_splash_screen_platform_interface
+      sha256: "8644f673942ff6247571ce94ede4a63c5d4d9b316805be4296a0a63a4918ad1b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   native_splash_screen_windows:
     dependency: transitive
     description:
-      path: "../../native_splash_screen_windows"
-      relative: true
-    source: path
-    version: "2.0.0"
+      name: native_splash_screen_windows
+      sha256: "16d4a65349dca2e63ebea325bb7ee9c2df2f1f54b89edc057591b09dbd8b72b0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   path:
     dependency: transitive
     description:

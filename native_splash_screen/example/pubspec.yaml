@@ -25,9 +25,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints:
-  # native_splash_screen_cli: '>=2.0.3 <3.0.0'
-  native_splash_screen_cli:
-    path: "../../native_splash_screen_cli"
+  native_splash_screen_cli: ">=2.1.0 <3.0.0"
 
 flutter:
   uses-material-design: true
