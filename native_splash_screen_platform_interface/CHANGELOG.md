@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Downgrade the minimum flutter and dart versions for the plugins.
+
 ## 2.0.0
 
 - New stable release for new platform.
