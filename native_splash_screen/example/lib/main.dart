@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(title: const Text('Native Splash Screen')),
         body: Center(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Wrap(
@@ -42,13 +42,13 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.all(8.0),
                     child: MaterialButton(
                       clipBehavior: Clip.antiAlias,
-                      padding: EdgeInsets.all(20),
-                      shape: RoundedRectangleBorder(
+                      padding: const EdgeInsets.all(20),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       textColor: Theme.of(context).colorScheme.onPrimary,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Close without animation",
                           style: TextStyle(fontSize: 24),
@@ -63,13 +63,13 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.all(8.0),
                     child: MaterialButton(
                       clipBehavior: Clip.antiAlias,
-                      padding: EdgeInsets.all(20),
-                      shape: RoundedRectangleBorder(
+                      padding: const EdgeInsets.all(20),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       textColor: Theme.of(context).colorScheme.onPrimary,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Close with Fading",
                           style: TextStyle(fontSize: 24),
@@ -84,13 +84,13 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.all(8.0),
                     child: MaterialButton(
                       clipBehavior: Clip.antiAlias,
-                      padding: EdgeInsets.all(20),
-                      shape: RoundedRectangleBorder(
+                      padding: const EdgeInsets.all(20),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       textColor: Theme.of(context).colorScheme.onPrimary,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Close with Slide Up Fading",
                           style: TextStyle(fontSize: 24),
@@ -105,13 +105,13 @@ class _MyAppState extends State<MyApp> {
                     padding: const EdgeInsets.all(8.0),
                     child: MaterialButton(
                       clipBehavior: Clip.antiAlias,
-                      padding: EdgeInsets.all(20),
-                      shape: RoundedRectangleBorder(
+                      padding: const EdgeInsets.all(20),
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7)),
                       ),
                       color: Theme.of(context).colorScheme.primary,
                       textColor: Theme.of(context).colorScheme.onPrimary,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "Close with Slide Down Fading",
                           style: TextStyle(fontSize: 24),

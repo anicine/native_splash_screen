@@ -16,8 +16,8 @@ platforms:
   macos:
 
 environment:
-  sdk: ^3.7.2
-  flutter: ">=3.10.0"
+  sdk: ^3.4.0
+  flutter: ">=3.22.0"
 
 flutter:
   plugin:
@@ -33,10 +33,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  native_splash_screen_platform_interface: ">=2.0.0 <3.0.0"
-  native_splash_screen_linux: ">=2.0.0 <3.0.0"
-  native_splash_screen_windows: ">=2.0.0 <3.0.0"
-  native_splash_screen_macos: ">=2.0.0 <3.0.0"
+  # native_splash_screen_platform_interface: ">=2.0.0 <3.0.0"
+  native_splash_screen_platform_interface:
+    path: "../native_splash_screen_platform_interface"
+  # native_splash_screen_linux: ">=2.0.0 <3.0.0"
+  native_splash_screen_linux:
+    path: "../native_splash_screen_linux"
+  # native_splash_screen_windows: ">=2.0.0 <3.0.0"
+  native_splash_screen_windows:
+    path: "../native_splash_screen_windows"
+  # native_splash_screen_macos: ">=2.0.0 <3.0.0"
+  native_splash_screen_macos:
+    path: "../native_splash_screen_macos"
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints:
