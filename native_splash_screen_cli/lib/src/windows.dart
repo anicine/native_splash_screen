@@ -27,8 +27,8 @@ DesktopSplashConfig? parseWindowsConfig(YamlMap yaml) {
   final windowsYaml = yaml['windows'] as YamlMap;
 
   // Default window dimensions
-  final windowWidth = windowsYaml['width'] as int? ?? 500;
-  final windowHeight = windowsYaml['height'] as int? ?? 250;
+  final windowWidth = windowsYaml['window_width'] as int? ?? 500;
+  final windowHeight = windowsYaml['window_height'] as int? ?? 250;
 
   // Background dimensions with logical constraints
   final backgroundWidth = windowsYaml['background_width'] as int? ?? 0;
@@ -44,7 +44,7 @@ DesktopSplashConfig? parseWindowsConfig(YamlMap yaml) {
   if (backgroundHeight > windowHeight) {
     throw Exception(
       'Windows configuration error: '
-      'background_height should be "<=" window_eight',
+      'background_height should be "<=" window_height',
     );
   }
 
@@ -88,7 +88,7 @@ DesktopSplashConfig? parseWindowsConfig(YamlMap yaml) {
   return DesktopSplashConfig(
     windowWidth: windowWidth,
     windowHeight: windowHeight,
-    windowTitle: windowsYaml['title'] as String? ?? 'Splash Screen',
+    windowTitle: windowsYaml['window_title'] as String? ?? 'Splash Screen',
     windowClass: windowsYaml['window_class'] as String? ?? 'splash_window',
     windowColor: windowColor,
     imagePath: imageFile.path,

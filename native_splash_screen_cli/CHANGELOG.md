@@ -1,3 +1,7 @@
+## 2.1.1
+
+- Fix a typo in the windows config parser.
+
 ## 2.1.0
 
 - Downgrade the minimum flutter and dart versions for the plugin.

@@ -44,7 +44,7 @@ DesktopSplashConfig? parseMacosConfig(YamlMap yaml) {
   if (backgroundHeight > windowHeight) {
     throw Exception(
       'Macos configuration error: '
-      'background_height should be "<=" window_eight',
+      'background_height should be "<=" window_height',
     );
   }
 

@@ -1,6 +1,6 @@
 name: native_splash_screen_cli
 description: "A CLI tool that generates native splash screen code for Flutter apps based on a YAML config file."
-version: 2.1.0
+version: 2.1.1
 repository: https://github.com/anicine/native_splash_screen
 
 
@@ -17,7 +17,7 @@ dependencies:
   args: ^2.7.0
   logger: ^2.5.0
   image: ^4.5.4
-  path: ^1.9.1
+  path: ^1.9.0
 
 dev_dependencies:
   lints:
