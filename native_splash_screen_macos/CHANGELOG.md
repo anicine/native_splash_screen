@@ -1,3 +1,7 @@
+## 2.1.0
+
+- Downgrade the minimum flutter and dart versions for the plugin.
+
 ## 2.0.1
 
 - Update the platform interface plugin
