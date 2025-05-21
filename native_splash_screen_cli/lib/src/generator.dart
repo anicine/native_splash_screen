@@ -204,21 +204,18 @@ class SplashScreenGenerator {
     }
 
     return Platforms(
-      linux:
-          platformsYaml['linux'] is YamlMap
-              ? parsePlatform(platformsYaml['linux'] as YamlMap, "linux/runner")
-              : null,
-      windows:
-          platformsYaml['windows'] is YamlMap
-              ? parsePlatform(
-                platformsYaml['windows'] as YamlMap,
-                "windows/runner",
-              )
-              : null,
-      macos:
-          platformsYaml['macos'] is YamlMap
-              ? parsePlatform(platformsYaml['macos'] as YamlMap, "macos/Runner")
-              : null,
+      linux: platformsYaml['linux'] is YamlMap
+          ? parsePlatform(platformsYaml['linux'] as YamlMap, "linux/runner")
+          : null,
+      windows: platformsYaml['windows'] is YamlMap
+          ? parsePlatform(
+              platformsYaml['windows'] as YamlMap,
+              "windows/runner",
+            )
+          : null,
+      macos: platformsYaml['macos'] is YamlMap
+          ? parsePlatform(platformsYaml['macos'] as YamlMap, "macos/Runner")
+          : null,
     );
     // TODO: Additional platforms can be added here in the future
   }

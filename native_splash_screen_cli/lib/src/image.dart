@@ -201,10 +201,9 @@ img.Image _composeWithBackground(
   img.fill(background, color: backgroundColor);
 
   // Apply border radius to background if needed
-  img.Image finalBackground =
-      backgroundBorderRadius > 0
-          ? _applyBorderRadius(background, backgroundBorderRadius)
-          : background;
+  img.Image finalBackground = backgroundBorderRadius > 0
+      ? _applyBorderRadius(background, backgroundBorderRadius)
+      : background;
 
   // Calculate position for foreground image based on alignment
   final Position position = _calculatePosition(

@@ -9,10 +9,9 @@ void createConfigFile([bool? force]) {
   final file = File('$dirPath/native_splash_screen.yaml');
 
   final currentDir = Directory.current.path;
-  final relativePath =
-      file.path.startsWith(currentDir)
-          ? file.path.replaceFirst(currentDir, '.')
-          : file.path;
+  final relativePath = file.path.startsWith(currentDir)
+      ? file.path.replaceFirst(currentDir, '.')
+      : file.path;
 
   if (file.existsSync() && force != true) {
     logger.w('''
