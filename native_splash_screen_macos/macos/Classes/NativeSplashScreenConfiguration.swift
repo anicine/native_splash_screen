@@ -8,7 +8,7 @@ public protocol NativeSplashScreenConfigurationProvider {
     var withAnimation: Bool { get }
 
     // Image Properties
-    var imagePixels: [UInt8] { get } // ARGB Data (Little Endian)
-    var imageWidth: Int { get } // Relevant only if imagePixelData is not nil
-    var imageHeight: Int { get } // Relevant only if imagePixelData is not nil
+    var imageFileName: String { get } // Image file name in resources
+    var imageWidth: Int { get } // Image width
+    var imageHeight: Int { get } // Image height
 }
