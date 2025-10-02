@@ -12,6 +12,7 @@ MacOS implementation of the native_splash_screen plugin.
   s.source           = { :path => '.' }
   
   s.source_files = 'Classes/**/*.swift'
+  s.resources = 'Resources/**/*'
   
   s.dependency 'FlutterMacOS'
   s.platform = :osx, '10.11'

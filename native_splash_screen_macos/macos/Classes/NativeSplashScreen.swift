@@ -33,14 +33,11 @@ public class NativeSplashScreen {
         
         let window = createSplashWindow(config: config)
         
-        if let image = createImageFromPixelBytes(bytes: config.imagePixels,
-                                                 width: config.imageWidth,
-                                                 height: config.imageHeight)
-        {
-            let imageView = createImageView(with: image, windowSize: window.frame.size)
+        if let image = loadImageFromResources(fileName: config.imageFileName) {
+            let imageView = createImageView(with: image, config: config, windowSize: window.frame.size)
             window.contentView?.addSubview(imageView)
         } else {
-            print("NativeSplashScreen: WARNING - Failed to create image from provided pixel data. Window will be blank.")
+            print("NativeSplashScreen: WARNING - Failed to load image '\(config.imageFileName)' from resources. Window will be blank.")
         }
         
         Self.splashWindow = window
@@ -121,65 +118,98 @@ public class NativeSplashScreen {
         return window
     }
 
-    private static func createImageFromPixelBytes(bytes: [UInt8], width: Int, height: Int) -> NSImage? {
-        // Assume width and height from config are valid if imageBytes is not empty,
-        // as the protocol makes imageBytes non-optional, implying an image is always expected.
-        // The CLI should ensure width*height*4 == bytes.count.
-        guard width > 0, height > 0, !bytes.isEmpty else { return nil }
+    private static func loadImageFromResources(fileName: String) -> NSImage? {
+        let fileNameWithoutExtension = (fileName as NSString).deletingPathExtension
         
-        let bitsPerComponent = 8
-        let bitsPerPixel = 32 // BGRA = 4 bytes per pixel
-        let bytesPerRow = width * 4
-        let expectedTotalBytes = bytesPerRow * height
-
-        guard bytes.count == expectedTotalBytes else {
-            print("NativeSplashScreen: ERROR - Pixel data size (\(bytes.count)) does not match expected size (\(expectedTotalBytes)) for \(width)x\(height) image.")
-            return nil
+        // 1. Try to load from NSImage named (for Assets.xcassets)
+        if let image = NSImage(named: fileNameWithoutExtension) {
+            return image
         }
-
-        // Convert [UInt8] to Data for CGDataProvider
-        let data = Data(bytes)
-
-        let cgImage = data.withUnsafeBytes { (unsafeRawBufferPointer: UnsafeRawBufferPointer) -> CGImage? in
-            guard let baseAddress = unsafeRawBufferPointer.baseAddress else { return nil }
+        
+        // 2. Try to load with full filename from NSImage named
+        if let image = NSImage(named: fileName) {
+            return image
+        }
+        
+        // List of potential file system locations to search for the image
+        var searchPaths: [String] = []
+        
+        // 3. Try bundle main resources
+        if let mainBundlePath = Bundle.main.path(forResource: fileName, ofType: nil) {
+            searchPaths.append(mainBundlePath)
+        }
+        
+        // 4. Try plugin bundle resources
+        if let pluginBundlePath = Bundle(for: NativeSplashScreen.self).path(forResource: fileName, ofType: nil) {
+            searchPaths.append(pluginBundlePath)
+        }
+        
+        // 5. Try relative to main bundle - Resources folder
+        let mainBundleURL = Bundle.main.bundleURL
+        let resourcesPath = mainBundleURL.appendingPathComponent("Contents/Resources/\(fileName)")
+        searchPaths.append(resourcesPath.path)
+        
+        // 6. Try relative to main bundle - Runner folder
+        let runnerResourcesPath = mainBundleURL.appendingPathComponent("Contents/Resources/Runner/\(fileName)")
+        searchPaths.append(runnerResourcesPath.path)
+        
+        // 7. Try project source path (development mode)
+        let projectPaths = [
+            "macos/Runner/Resources/\(fileName)",
+            "Runner/Resources/\(fileName)",
+            "Resources/\(fileName)"
+        ]
+        for projectPath in projectPaths {
+            searchPaths.append(projectPath)
+        }
+        
+        // Try to load image from each path
+        for imagePath in searchPaths {
+            if FileManager.default.fileExists(atPath: imagePath) {
+                if let image = NSImage(contentsOfFile: imagePath) {
+                    print("NativeSplashScreen: SUCCESS - Loaded image from: \(imagePath)")
+                    return image
+                }
+            }
+        }
+        
+        // Try with different extensions if no extension specified
+        let extensions = ["png", "jpg", "jpeg"]
+        
+        for ext in extensions {
+            let fileNameWithExt = "\(fileNameWithoutExtension).\(ext)"
             
-            guard let providerRef = CGDataProvider(dataInfo: nil, data: baseAddress, size: data.count, releaseData: { _, _, _ in }) else { return nil }
-
-            // This assumes your bytes are in B, G, R, A order from Dart.
-            let bitmapInfo: CGBitmapInfo = [
-                CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), // Alpha is considered the "first" component after little-endian interpretation.
-                CGBitmapInfo.byteOrder32Little // BGRA byte streams on little-endian macOS
-            ]
-
-            return CGImage(
-                width: width,
-                height: height,
-                bitsPerComponent: bitsPerComponent,
-                bitsPerPixel: bitsPerPixel,
-                bytesPerRow: bytesPerRow,
-                space: CGColorSpaceCreateDeviceRGB(),
-                bitmapInfo: bitmapInfo,
-                provider: providerRef,
-                decode: nil,
-                shouldInterpolate: true,
-                intent: .defaultIntent
-            )
+            // Repeat the search with the extension
+            for basePath in searchPaths {
+                let pathWithExt = (basePath as NSString).deletingLastPathComponent + "/\(fileNameWithExt)"
+                if FileManager.default.fileExists(atPath: pathWithExt) {
+                    if let image = NSImage(contentsOfFile: pathWithExt) {
+                        print("NativeSplashScreen: SUCCESS - Loaded image from: \(pathWithExt)")
+                        return image
+                    }
+                }
+            }
         }
         
-        if let validCGImage = cgImage {
-            return NSImage(cgImage: validCGImage, size: NSSize(width: width, height: height))
+        print("NativeSplashScreen: ERROR - Could not find image file '\(fileName)' in any of these locations:")
+        for searchPath in searchPaths {
+            print("  - \(searchPath) (exists: \(FileManager.default.fileExists(atPath: searchPath)))")
         }
         return nil
     }
 
-    private static func createImageView(with image: NSImage, windowSize: NSSize) -> NSImageView {
+    private static func createImageView(with image: NSImage, config: NativeSplashScreenConfigurationProvider, windowSize: NSSize) -> NSImageView {
         let imageView = NSImageView(image: image)
         imageView.imageScaling = .scaleProportionallyUpOrDown // Sensible default
 
-        let imageX = (windowSize.width - image.size.width) / 2.0
-        let imageY = (windowSize.height - image.size.height) / 2.0
+        // Use configured image dimensions (logical size) instead of actual image dimensions
+        let imageWidth = CGFloat(config.imageWidth)
+        let imageHeight = CGFloat(config.imageHeight)
         
-        imageView.frame = NSRect(x: imageX, y: imageY, width: image.size.width, height: image.size.height)
+        let imageX = (windowSize.width - imageWidth) / 2.0
+        let imageY = (windowSize.height - imageHeight) / 2.0
+        
+        imageView.frame = NSRect(x: imageX, y: imageY, width: imageWidth, height: imageHeight)
         return imageView
     }
     

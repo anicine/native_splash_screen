@@ -14,7 +14,7 @@ int native_splash_screen_width = 500;
 int native_splash_screen_height = 250;
 
 // Window Title
-const wchar_t* native_splash_screen_title = L"Splash Screen";
+const wchar_t* native_splash_screen_title = L"My Flutter App (Profile)";
 
 // Window class name
 const wchar_t* native_splash_screen_window_class = L"splash_window";
