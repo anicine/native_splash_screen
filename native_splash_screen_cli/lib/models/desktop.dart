@@ -35,4 +35,42 @@ class DesktopSplashConfig {
     required this.withAnimation,
     required this.imageBlurRadius,
   });
+  DesktopSplashConfig copyWith({
+    int? windowWidth,
+    int? windowHeight,
+    String? windowTitle,
+    String? windowClass,
+    Color? windowColor,
+    String? imagePath,
+    int? imageWidth,
+    int? imageHeight,
+    double? imageBorderRadius,
+    double? imageBlurRadius,
+    bool? imageScaling,
+    Color? backgroundColor,
+    int? backgroundWidth,
+    int? backgroundHeight,
+    double? backgroundBorderRadius,
+    bool? withAnimation,
+  }) {
+    return DesktopSplashConfig(
+      windowWidth: windowWidth ?? this.windowWidth,
+      windowHeight: windowHeight ?? this.windowHeight,
+      windowTitle: windowTitle ?? this.windowTitle,
+      windowClass: windowClass ?? this.windowClass,
+      windowColor: windowColor ?? this.windowColor,
+      imagePath: imagePath ?? this.imagePath,
+      imageWidth: imageWidth ?? this.imageWidth,
+      imageHeight: imageHeight ?? this.imageHeight,
+      imageBorderRadius: imageBorderRadius ?? this.imageBorderRadius,
+      imageScaling: imageScaling ?? this.imageScaling,
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      backgroundWidth: backgroundWidth ?? this.backgroundWidth,
+      backgroundHeight: backgroundHeight ?? this.backgroundHeight,
+      backgroundBorderRadius:
+          backgroundBorderRadius ?? this.backgroundBorderRadius,
+      withAnimation: withAnimation ?? this.withAnimation,
+      imageBlurRadius: imageBlurRadius ?? this.imageBlurRadius,
+    );
+  }
 }

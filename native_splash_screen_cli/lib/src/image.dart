@@ -23,6 +23,12 @@ Future<BGRAImage> loadImageAsBGRA(
 
   // Position options
   ImageAlignment alignment = ImageAlignment.center,
+
+  // PLATFORM-SPECIFIC OVERRIDE
+  // When true, guarantees the final image has the dimensions of targetWidth/Height,
+  // creating a transparent canvas if no background color is provided.
+  // This is essential for the macOS asset pipeline.
+  bool ensureCanvasSize = false,
 }) async {
   // Load and decode the image
   final img.Image decodedImage = await _decodeImageFromPath(path);
@@ -37,23 +43,36 @@ Future<BGRAImage> loadImageAsBGRA(
     borderRadius: imageBorderRadius,
   );
 
-  // If background options are provided, compose the image with background
-  if (backgroundColor != null && backgroundColor.a != 0) {
-    // print(backgroundColor.a);
-    if (backgroundWidth != 0 || backgroundHeight != 0) {
-      final composedImage = _composeWithBackground(
-        processedImage,
-        backgroundColor: backgroundColor,
-        backgroundWidth:
-            backgroundWidth != 0 ? backgroundWidth : processedImage.width,
-        backgroundHeight:
-            backgroundHeight != 0 ? backgroundHeight : processedImage.height,
-        backgroundBorderRadius: backgroundBorderRadius,
-        alignment: alignment,
-      );
+  // Determine if a background composition is needed.
+  final bool hasVisibleBackground =
+      backgroundColor != null && backgroundColor.a != 0;
 
-      return _convertToGBRA(composedImage);
-    }
+  // If the user specified a visible background, use it.
+  if (hasVisibleBackground) {
+    final composedImage = _composeWithBackground(
+      processedImage,
+      backgroundColor: backgroundColor,
+      backgroundWidth:
+          backgroundWidth > 0 ? backgroundWidth : processedImage.width,
+      backgroundHeight:
+          backgroundHeight > 0 ? backgroundHeight : processedImage.height,
+      backgroundBorderRadius: backgroundBorderRadius,
+      alignment: alignment,
+    );
+    return _convertToGBRA(composedImage);
+  }
+  // If macOS requires a canvas, create a transparent one and compose.
+  else if (ensureCanvasSize && targetWidth > 0 && targetHeight > 0) {
+    final composedImage = _composeWithBackground(
+      processedImage,
+      // Use a completely transparent background to force the canvas size.
+      backgroundColor: img.ColorRgba8(0, 0, 0, 0),
+      backgroundWidth: targetWidth,
+      backgroundHeight: targetHeight,
+      backgroundBorderRadius: backgroundBorderRadius, // Still respect rounding
+      alignment: alignment,
+    );
+    return _convertToGBRA(composedImage);
   }
 
   // Otherwise return the processed image directly
@@ -83,13 +102,19 @@ img.Image _processImage(
 }) {
   img.Image result = image;
 
-  // Resize if needed
-  if (resizeToFit && targetWidth > 0 && targetHeight > 0) {
+  // We resize under two conditions:
+  // 1. The user explicitly allows it (resizeToFit = true).
+  // 2. We are DOWN-scaling a larger image, which preserves quality.
+  final bool shouldResize = (resizeToFit ||
+          (image.width > targetWidth || image.height > targetHeight)) &&
+      (targetWidth > 0 && targetHeight > 0);
+
+  if (shouldResize) {
     result = img.copyResize(
       result,
       width: targetWidth,
       height: targetHeight,
-      interpolation: img.Interpolation.cubic,
+      interpolation: img.Interpolation.average,
     );
   }
 

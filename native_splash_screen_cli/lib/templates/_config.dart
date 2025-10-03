@@ -93,7 +93,7 @@ Use the --force option to overwrite it.
 #                          Must point to an valid image file.
 #   - image_width (int): Width of the image inside the splash window.
 #   - image_height (int): Height of the image inside the splash window.
-#   - image_scaling (bool): Whether to allow scaling of the image to fit.
+#   - image_scaling (bool): Whether to allow upscaling of the image to fit.
 #   - image_border_radius (double): Radius for image corners.
 #   - blur_radius (double): Apply blur effect to the image. 0.0 = no blur.
 #                           This may help if your image look so sharp.

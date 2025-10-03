@@ -94,7 +94,7 @@ class NativeSplashScreenConfiguration: NativeSplashScreenConfigurationProvider {
 
     var withAnimation: Bool { activeConfiguration.withAnimation }
 
-    var imagePixels: [UInt8] { activeConfiguration.imagePixels }
+    var imageFileName: String { activeConfiguration.imageFileName }
     var imageWidth: Int { activeConfiguration.imageWidth }
     var imageHeight: Int { activeConfiguration.imageHeight }
 }

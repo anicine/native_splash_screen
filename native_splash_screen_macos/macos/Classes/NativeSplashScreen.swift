@@ -119,83 +119,16 @@ public class NativeSplashScreen {
     }
 
     private static func loadImageFromResources(fileName: String) -> NSImage? {
-        let fileNameWithoutExtension = (fileName as NSString).deletingPathExtension
-        
-        // 1. Try to load from NSImage named (for Assets.xcassets)
-        if let image = NSImage(named: fileNameWithoutExtension) {
+        let imageName = (fileName as NSString).deletingPathExtension
+
+        // NSImage(named:) automatically handles Retina (@2x) vs. standard (@1x) resolution.
+        // It looks for the image inside the compiled Assets.xcassets catalog.
+        if let image = NSImage(named: imageName) {
             return image
+        } else {
+            print("NativeSplashScreen: ERROR - Could not load image named '\(imageName)' from the asset catalog. Make sure it's included in the target's build phase.")
+            return nil
         }
-        
-        // 2. Try to load with full filename from NSImage named
-        if let image = NSImage(named: fileName) {
-            return image
-        }
-        
-        // List of potential file system locations to search for the image
-        var searchPaths: [String] = []
-        
-        // 3. Try bundle main resources
-        if let mainBundlePath = Bundle.main.path(forResource: fileName, ofType: nil) {
-            searchPaths.append(mainBundlePath)
-        }
-        
-        // 4. Try plugin bundle resources
-        if let pluginBundlePath = Bundle(for: NativeSplashScreen.self).path(forResource: fileName, ofType: nil) {
-            searchPaths.append(pluginBundlePath)
-        }
-        
-        // 5. Try relative to main bundle - Resources folder
-        let mainBundleURL = Bundle.main.bundleURL
-        let resourcesPath = mainBundleURL.appendingPathComponent("Contents/Resources/\(fileName)")
-        searchPaths.append(resourcesPath.path)
-        
-        // 6. Try relative to main bundle - Runner folder
-        let runnerResourcesPath = mainBundleURL.appendingPathComponent("Contents/Resources/Runner/\(fileName)")
-        searchPaths.append(runnerResourcesPath.path)
-        
-        // 7. Try project source path (development mode)
-        let projectPaths = [
-            "macos/Runner/Resources/\(fileName)",
-            "Runner/Resources/\(fileName)",
-            "Resources/\(fileName)"
-        ]
-        for projectPath in projectPaths {
-            searchPaths.append(projectPath)
-        }
-        
-        // Try to load image from each path
-        for imagePath in searchPaths {
-            if FileManager.default.fileExists(atPath: imagePath) {
-                if let image = NSImage(contentsOfFile: imagePath) {
-                    print("NativeSplashScreen: SUCCESS - Loaded image from: \(imagePath)")
-                    return image
-                }
-            }
-        }
-        
-        // Try with different extensions if no extension specified
-        let extensions = ["png", "jpg", "jpeg"]
-        
-        for ext in extensions {
-            let fileNameWithExt = "\(fileNameWithoutExtension).\(ext)"
-            
-            // Repeat the search with the extension
-            for basePath in searchPaths {
-                let pathWithExt = (basePath as NSString).deletingLastPathComponent + "/\(fileNameWithExt)"
-                if FileManager.default.fileExists(atPath: pathWithExt) {
-                    if let image = NSImage(contentsOfFile: pathWithExt) {
-                        print("NativeSplashScreen: SUCCESS - Loaded image from: \(pathWithExt)")
-                        return image
-                    }
-                }
-            }
-        }
-        
-        print("NativeSplashScreen: ERROR - Could not find image file '\(fileName)' in any of these locations:")
-        for searchPath in searchPaths {
-            print("  - \(searchPath) (exists: \(FileManager.default.fileExists(atPath: searchPath)))")
-        }
-        return nil
     }
 
     private static func createImageView(with image: NSImage, config: NativeSplashScreenConfigurationProvider, windowSize: NSSize) -> NSImageView {

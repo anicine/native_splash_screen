@@ -14,7 +14,7 @@ import '../src/image.dart';
 ///
 /// Takes a [config] object containing splash screen configuration,
 /// a [flavor] string to support multiple build flavors,
-/// and an output [path] to override the default location.
+/// and an output [outputDir] to override the default location.
 ///
 /// Returns [true] if generation was successful, [false] otherwise.
 Future<bool> generateLinuxCode({
