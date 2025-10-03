@@ -1,6 +1,6 @@
 name: native_splash_screen_example
 description: "Demonstrates how to use the native_splash_screen plugin."
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0
 
 platforms:
@@ -22,10 +22,9 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
 
-
 dev_dependencies:
   flutter_lints:
-  native_splash_screen_cli: ">=2.1.0 <3.0.0"
+  native_splash_screen_cli: ">=3.0.0 <4.0.0"
 
 flutter:
   uses-material-design: true

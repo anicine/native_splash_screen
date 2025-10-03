@@ -3,3 +3,6 @@
 .fvm/
 
 .DS_Store
+
+# VSCode terminal history
+.vscode/.workspace_bash_history

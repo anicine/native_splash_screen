@@ -23,6 +23,7 @@
     - [🪟 Windows](#-windows-1)
     - [🍎 Macos](#-macos-1)
 - [🚀 Usage](#-usage)
+- [🍎 macOS Configuration Notes](#-macos-configuration-notes)
 - [🛠️ How It Works](#️-how-it-works)
 - [📝 Configuration](#-configuration)
 - [🎥 Demos](#-demos)
@@ -33,6 +34,7 @@
 ## ✨ Features
 
 - 🖼️ Native splash screens on Linux (GTK + Cairo) and Windows (WinGDI) and Macos (AppKit + Cocoa)
+-  🖥️ Retina Display Support: Automatically generates 1x and 2x assets for macOS, ensuring crystal-clear splash screens on all displays.
 - 🎞️ Runtime closing animations e.g : fading
 - ⚙️ CLI-driven image layout and asset generation
 - 🧩 Static linking — zero runtime dependencies
@@ -46,17 +48,17 @@ Add `native_splash_screen` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  native_splash_screen: ^2.1.0
+  native_splash_screen: ^3.0.0
 ```
 
 Also add the CLI tool under dev_dependencies:
 
 ```yaml
 dev_dependencies:
-  native_splash_screen_cli: ^2.1.0
+  native_splash_screen_cli: ^3.0.0
 ```
 
-> 💡 Make sure both native_splash_screen and native_splash_screen_cli use the same major version to ensure compatibility between the runtime plugin and the code generator.
+> ⚠️ **Caution:** To avoid errors, ensure `native_splash_screen` and `native_splash_screen_cli` are on the same major version (e.g., `3.x.x`). The runtime and CLI tool are designed to work together.
 
 Then run:
 
@@ -341,6 +343,24 @@ class _MyAppState extends State<MyApp> {
 >💡 Calling `close()` multiple times or when the splash screen is already closed has no effect and is completely safe.
 
 See the [example app](https://github.com/anicine/native_splash_screen/tree/main/native_splash_screen/example) for more details.
+
+## 🍎 macOS Configuration Notes
+
+The package automatically generates assets for both standard (1x) and high-resolution Retina (2x) displays to ensure your splash screen looks sharp on all devices.
+
+#### Quality Recommendation for Retina Displays
+
+For the best visual quality, your source image in `image_path` should have pixel dimensions that are at least **twice** the configured `image_width` and `image_height`.
+
+> **Example**: For an `image_width` of 400 and `image_height` of 200, provide a source image that is at least **800x400 pixels**.
+
+#### How `image_scaling` works on macOS
+
+The scaling logic is designed to prevent quality loss.
+
+-   **`image_scaling: false` (Default)**: Prevents a small source image from being upscaled (stretched), which causes blurriness. If the image is smaller than the target dimensions, it will be centered on the splash screen at its original size. Large images will still be cleanly downscaled to fit.
+
+-   **`image_scaling: true`**: Forces the image to be resized to exactly match the configured `image_width` and `image_height`, whether it's upscaling or downscaling.
 
 ## 🛠️ How It Works
 

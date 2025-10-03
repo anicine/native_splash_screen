@@ -47,7 +47,7 @@
 # Fields:
 #
 #   - window_width (int):  Width of the splash window in pixels.
-#                          Default to 500. 
+#                          Default to 500.
 #   - window_height (int): Height of the splash window in pixels.
 #                          Default to 250.
 #   - window_title (string): Title of the splash window.
@@ -66,7 +66,7 @@
 #                          Must point to an valid image file.
 #   - image_width (int): Width of the image inside the splash window.
 #   - image_height (int): Height of the image inside the splash window.
-#   - image_scaling (bool): Whether to allow scaling of the image to fit.
+#   - image_scaling (bool): Whether to allow upscaling of the image to fit.
 #   - image_border_radius (double): Radius for image corners.
 #   - blur_radius (double): Apply blur effect to the image. 0.0 = no blur.
 #                           This may help if your image look so sharp.
@@ -109,7 +109,7 @@
 
 # ─── Example Begins Below ─────────────────────────────────────────────────
 
-# Configuration version for the parser 
+# Configuration version for the parser
 version: v1
 
 # Platform configuration
@@ -143,7 +143,7 @@ release:
     image_height: 250
     image_scaling: true
     image_border_radius: 0.0
-    
+
     blur_radius: 0.0
     with_animation: true
 
@@ -164,7 +164,7 @@ release:
     image_height: 250
     image_scaling: true
     image_border_radius: 0.0
-    
+
     blur_radius: 0.0
     with_animation: true
 
@@ -244,7 +244,7 @@ flavors:
       window_height: 250
       window_title: "My Flutter App (Dev)"
       background_color: "rgba(0,0,0,0)"
-      
+
       image_path: "assets/splash_screen/dev.png"
       image_width: 500
       image_height: 250
@@ -255,7 +255,7 @@ flavors:
       window_height: 250
       window_title: "My Flutter App (Dev)"
       background_color: "rgba(0,0,0,0)"
-      
+
       image_path: "assets/splash_screen/dev.png"
       image_width: 500
       image_height: 250

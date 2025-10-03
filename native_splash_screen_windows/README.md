@@ -18,9 +18,8 @@ The Windows implementation for the [`native_splash_screen`](https://pub.dev/pack
 
 You do **not** need to include this package manually. Just add the main plugin:
 
-```yaml
-dependencies:
-  native_splash_screen: ^2.1.0
+```sh
+flutter pub add native_splash_screen
 ```
 
 ## License

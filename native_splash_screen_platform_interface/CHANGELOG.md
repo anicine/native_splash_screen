@@ -1,3 +1,7 @@
+## 3.0.0
+
+- Aligned version with project-wide `3.0.0` release.
+
 ## 2.1.0
 
 - Downgrade the minimum flutter and dart versions for the plugins.

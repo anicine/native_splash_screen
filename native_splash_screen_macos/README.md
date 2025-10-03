@@ -8,6 +8,7 @@ The Macos implementation for the [`native_splash_screen`](https://pub.dev/packag
 ## Features
 
 - Native AppKit splash screen window.
+- Retina Display Support.
 - Customizable via a YAML config (`native_splash_screen.yaml`) using the [`native_splash_screen_cli`](https://pub.dev/packages/native_splash_screen_cli) tool.
 - Supports:
   - Configurable image, size, colors, blur, and border radius
@@ -22,9 +23,8 @@ This plugin is intended for **desktop Macos** environments.
 You do **not** need to install this package directly.  
 Add the main plugin instead:
 
-```yaml
-dependencies:
-  native_splash_screen: ^2.1.0
+```sh
+flutter pub add native_splash_screen
 ```
 
 ## License

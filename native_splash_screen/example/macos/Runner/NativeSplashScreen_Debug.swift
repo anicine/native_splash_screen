@@ -3,7 +3,6 @@
 
 import native_splash_screen_macos
 
-
 class DebugNativeSplashScreenConfiguration: NativeSplashScreenConfigurationProvider {
 
     // MARK: - Splash screen properties

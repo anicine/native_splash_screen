@@ -23,9 +23,8 @@ This plugin is intended for **desktop Linux** environments. It supports both X11
 You do **not** need to install this package directly.  
 Add the main plugin instead:
 
-```yaml
-dependencies:
-  native_splash_screen: ^2.1.0
+```sh
+flutter pub add native_splash_screen
 ```
 ## License
 

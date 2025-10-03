@@ -3,7 +3,7 @@ description: >
   A fully configurable native splash screen plugin for Flutter apps,
   supporting static linking, runtime animations, and CLI-based asset generation.
 repository: https://github.com/anicine/native_splash_screen
-version: 2.1.0
+version: 3.0.0
 
 topics:
   - splash-screen
@@ -33,10 +33,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  native_splash_screen_platform_interface: ">=2.1.0 <3.0.0"
-  native_splash_screen_linux: ">=2.1.0 <3.0.0"
-  native_splash_screen_windows: ">=2.1.0 <3.0.0"
-  native_splash_screen_macos: ">=2.1.0 <3.0.0"
+  native_splash_screen_platform_interface: ">=3.0.0 <4.0.0"
+  native_splash_screen_linux: ">=3.0.0 <4.0.0"
+  native_splash_screen_windows: ">=3.0.0 <4.0.0"
+  native_splash_screen_macos: ">=3.0.0 <4.0.0"
 
 dev_dependencies:
   flutter_lints:

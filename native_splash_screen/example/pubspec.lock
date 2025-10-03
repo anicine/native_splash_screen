@@ -21,18 +21,18 @@ packages:
     dependency: transitive
     description:
       name: characters
-      sha256: f71061c654a3380576a52b451dd5532377954cf9dbd272a78fc8479606670803
+      sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.3.0"
   collection:
     dependency: transitive
     description:
       name: collection
-      sha256: "2f5709ae4d3d59dd8f7cd309b4e023046b57d8a6c82130785d2b0e5868084e76"
+      sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
       url: "https://pub.dev"
     source: hosted
-    version: "1.19.1"
+    version: "1.18.0"
   crypto:
     dependency: transitive
     description:
@@ -90,64 +90,65 @@ packages:
     dependency: transitive
     description:
       name: material_color_utilities
-      sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
+      sha256: "0e0a020085b65b6083975e499759762399b4475f766c21668c4ecca34ea74e5a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.11.1"
+    version: "0.8.0"
   meta:
     dependency: transitive
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "7687075e408b093f36e6bbf6c91878cc0d4cd10f409506f7bc996f68220b9136"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.12.0"
   native_splash_screen:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "2.1.0"
+    version: "3.0.0"
   native_splash_screen_cli:
     dependency: "direct dev"
     description:
-      path: "../../native_splash_screen_cli"
-      relative: true
-    source: path
-    version: "2.1.1"
+      name: native_splash_screen_cli
+      sha256: "9449610a44a73064e238aa068159bec0412f569a36fa652f9a5f4e2c9e64e6cf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   native_splash_screen_linux:
     dependency: transitive
     description:
       name: native_splash_screen_linux
-      sha256: "0b22aef68df012d3e26d6f5dc22e119578b968d8e5502de6f76758727944a37b"
+      sha256: e8b6ecc6a2cd9e5c29a57eace024f02e00207378f824a645bf4d5248e1655117
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.0"
   native_splash_screen_macos:
     dependency: transitive
     description:
       name: native_splash_screen_macos
-      sha256: cb49012650eefa71b59da2c937ea251f99e1fd7113884474dfe66bb0a64487d9
+      sha256: cae3c86844d9ebb362c2437a234cffd4839d9ecbe58cf74352b6574c29c3078a
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.0"
   native_splash_screen_platform_interface:
     dependency: transitive
     description:
       name: native_splash_screen_platform_interface
-      sha256: "8644f673942ff6247571ce94ede4a63c5d4d9b316805be4296a0a63a4918ad1b"
+      sha256: d1ba329116ed47dd6422442beaad1cc3ea4f7c2d926c4450b946a959de80d446
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.0"
   native_splash_screen_windows:
     dependency: transitive
     description:
       name: native_splash_screen_windows
-      sha256: "16d4a65349dca2e63ebea325bb7ee9c2df2f1f54b89edc057591b09dbd8b72b0"
+      sha256: "9c9f5130b3fc9b0300d564270517ce79530fb04d69b7f7c030ab8678e04e2834"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.0"
   path:
     dependency: transitive
     description:
@@ -184,7 +185,7 @@ packages:
     dependency: transitive
     description: flutter
     source: sdk
-    version: "0.0.0"
+    version: "0.0.99"
   source_span:
     dependency: transitive
     description:
@@ -221,10 +222,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: d530bd74fea330e6e364cda7a85019c434070188383e1cd8d9777ee586914c5b
+      sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.1.4"
   xml:
     dependency: transitive
     description:
@@ -242,5 +243,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.8.0-0 <4.0.0"
+  dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.22.0"
